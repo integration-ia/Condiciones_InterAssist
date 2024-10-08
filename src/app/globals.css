@@ -2,6 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .container {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem; /* Ajusta según necesites */
+    padding-right: 1rem; /* Ajusta según necesites */
+  }
+}
+
+@layer utilities {
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+
+  .perspective {
+    perspective: 1000px;
+  }
+
+  .transform-style-preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
