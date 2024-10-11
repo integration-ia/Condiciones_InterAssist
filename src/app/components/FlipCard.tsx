@@ -138,18 +138,18 @@ const FlipCard: React.FC<FlipCardProps> = ({ title, info, category, moreinfo }) 
       {/* Modal (Pop-up) */}
       {isExpanded && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 "
           onClick={handleCloseModal} // Cerrar modal al hacer clic afuera
         >
-          <div className="bg-white p-8 rounded-lg w-2/4 h-2/4 relative">
+          <div className="bg-white p-8 rounded-lg w-2/4 h-2/4 relative sm: w-full h-full px-4">
             <button
               className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-full"
               onClick={() => setIsExpanded(false)} // Cerrar modal al hacer clic en la cruz
             >
               X
             </button>
-            <h2 className="text-2xl font-bold mb-8 mt-8">{title} - Información detallada</h2>
-            <p className="text-gray-700 text-sm whitespace-pre-wrap mr-12">
+            <h2 className="text-2xl font-bold text-black mb-8 mt-8">{title} - Información detallada</h2>
+            <p className="text-gray-700 text-sm whitespace-pre-wrap mr-12 sm: mr-3 ">
               {moreinfo}
             </p>
           </div>
