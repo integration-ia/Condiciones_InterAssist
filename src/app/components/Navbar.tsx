@@ -34,9 +34,9 @@ const Navbar: React.FC = () => {
         navScrolled || !isHomePage ? "bg-gray-800" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto flex justify-between items-center p-4">
+      <div className="container mx-auto flex justify-between items-center p-4 ">
         {/* Logo */}
-        <div className="text-white text-2xl font-bold">
+        <div className="text-white text-2xl font-bold sm: w-40 ">
           <Link href="/">
             <Image
               src="/images/Horizontal_blanco.png" // Asegúrate de que el logo esté en esta ruta
@@ -50,9 +50,6 @@ const Navbar: React.FC = () => {
         {/* Menu for larger screens */}
         <div className="hidden md:flex space-x-6 text-white">
           <Link href="/terms">Términos & Condiciones</Link>
-          <Link href="/portfolio">Portfolio</Link>
-          <Link href="/services">Services</Link>
-          <Link href="/contact">Contact</Link>
         </div>
 
         {/* Hamburger menu for mobile */}
@@ -70,17 +67,8 @@ const Navbar: React.FC = () => {
       {/* Dropdown menu for mobile */}
       {menuOpen && (
         <div className="md:hidden bg-gray-800 text-white">
-          <Link href="/about" className="block px-4 py-2">
-            About
-          </Link>
-          <Link href="/portfolio" className="block px-4 py-2">
-            Portfolio
-          </Link>
-          <Link href="/services" className="block px-4 py-2">
-            Services
-          </Link>
-          <Link href="/contact" className="block px-4 py-2">
-            Contact
+          <Link href="/terms" className="block px-4 py-2">
+          Términos & Condiciones
           </Link>
         </div>
       )}

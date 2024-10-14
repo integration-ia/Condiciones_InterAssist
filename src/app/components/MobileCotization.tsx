@@ -39,7 +39,7 @@ export default function MobileCotization() {
   });
 
   return (
-    <div className="ml-auto flex items-center min-h-screen bg-transparent p-4 mr-60">
+    <div className="ml-auto flex items-center min-h-screen bg-transparent p-4 mr-60 m: mr-24">
       {/* iPhone-like container */}
       <div className="relative w-[375px] h-[812px] bg-white rounded-[50px] shadow-xl overflow-hidden border-8 border-gray-800">
         {/* iPhone-like top bar */}
@@ -47,9 +47,9 @@ export default function MobileCotization() {
 
         {/* Main content area */}
         <div className="p-6 overflow-y-auto custom-scrollbar h-full flex flex-col justify-between bg-white">
-          <h3 className="text-2xl font-bold mb-4 mt-6 text-center text-black">
+          <h5 className="text-2xl font-bold mb-4 mt-6 text-center text-black">
             Cotizador de Viaje
-          </h3>
+          </h5>
           <form className="space-y-4">
             {/* Email */}
             <div className="space-y-2">

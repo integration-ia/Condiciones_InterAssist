@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import HeroSection from "../components/HeroSection";
 import SearchAndCards from "../components/SearchAndCards";
 import Image from 'next/image';
-import MobileCotization from "../components/MobileCotization";
+
 
 const TermsPage: React.FC = () => {
   useEffect(() => {
@@ -18,7 +18,7 @@ const TermsPage: React.FC = () => {
       <h1 className="text-3xl font-bold mb-4 text-gray-700"></h1>
       <HeroSection />
       <SearchAndCards />
-      <MobileCotization />
+      
     </div>
   );
 };
