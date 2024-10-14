@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import localFont from "next/font/local";
 import "./globals.css";
+import Navbar from "./components/Navbar"; // Importa el Navbar
 
 // Cargando las fuentes personalizadas
 const geistSans = localFont({
@@ -31,15 +32,13 @@ export default function RootLayout({
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title></title>
-        <meta name="description" content='s' />
-        {/* Puedes agregar más etiquetas meta si lo deseas */}
+        <title>Create Next App</title>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Navbar /> {/* Incluye el Navbar aquí */}
         {children}
-        {/* Integración de Vercel Analytics */}
         <Analytics />
       </body>
     </html>

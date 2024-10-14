@@ -54,3 +54,64 @@ body {
     text-wrap: balance;
   }
 }
+
+/* globals.css */
+
+:root {
+  --text-01: #45413E;
+  --light-01: #F9F9F9;
+  --light-02: #FFFFFF;
+  --brand-01: #DB7F67;
+  --brand-02: #F4CFC6;
+  --card-hover: 0px 4px 24px rgba(0, 0, 0, 0.15);
+  --card-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+  --hover-timing: all 0.2s ease;
+  --nav-card-size: 240px;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--light-01);
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.hi-1 {
+  background-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470");
+}
+
+.hi-2 {
+  background-image: url("https://images.unsplash.com/photo-1517057011470-8f36d636e6ca");
+}
+
+.hi-3 {
+  background-image: url("https://images.unsplash.com/flagged/photo-1552035791-b3cc1632e933");
+}
+
+.hi-4 {
+  background-image: url("https://images.unsplash.com/photo-1574700273608-7962d3602a9f");
+}
+
+.hi-5 {
+  background-image: url("https://images.unsplash.com/photo-1605045544284-d13c6d6a60a6");
+}
+
+/* Estilos adicionales que ya tenías en tu CSS */
+/* Estilos para la barra de desplazamiento personalizada */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px; /* Ancho de la barra de desplazamiento */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent; /* Fondo del track */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2); /* Color del pulgar */
+  border-radius: 3px; /* Redondear esquinas */
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent; /* Firefox */
+}
