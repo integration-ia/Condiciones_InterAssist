@@ -4,10 +4,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image'; 
 
 // Importa las imágenes
-import Mochila from '../../../public/images/Mochila.png';
-import Avion from '../../../public/images/avion.png';
-import BoletoDorado from '../../../public/images/boletodorado.png';
-import Mascota from '../../../public/images/f4d38af8-d798-432c-b193-17e8d5285174.webp';
+import Mochila from '../../../../public/images/Mochila.png';
+import Avion from '../../../../public/images/avion.png';
+import BoletoDorado from '../../../../public/images/boletodorado.png';
+import Mascota from '../../../../public/images/f4d38af8-d798-432c-b193-17e8d5285174.webp';
 
 export default function TravelAssistanceCards() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -43,7 +43,9 @@ export default function TravelAssistanceCards() {
           <li>✔ Ejemplo: Tratamiento de una intoxicación leve</li>
           <li>✔ Pérdida de equipaje: <strong>$600 USD</strong></li>
         </ul>
-      )
+      ),
+      gradient: 'from-emerald-400 to-teal-600',
+      shape: 'M0,20 L100,0 L100,85 C75,110 50,85 0,100 Z'
     },
     { 
       title: 'Inter 100', 
@@ -57,7 +59,9 @@ export default function TravelAssistanceCards() {
           <li>✔ Ejemplo: Tratamiento por fractura durante una actividad recreativa</li>
           <li>✔ Pérdida de equipaje: <strong>$1,200 USD</strong></li>
         </ul>
-      )
+      ),
+      gradient: 'from-blue-400 to-indigo-600',
+      shape: 'M0,35 C25,15 75,15 100,35 L100,100 C75,85 25,85 0,100 Z'
     },
     { 
       title: 'Inter 200', 
@@ -71,7 +75,9 @@ export default function TravelAssistanceCards() {
           <li>✔ Ejemplo: Cirugía de emergencia en un viaje largo</li>
           <li>✔ Pérdida de equipaje: <strong>$2,000 USD</strong></li>
         </ul>
-      )
+      ),
+      gradient: 'from-purple-400 to-pink-600',
+      shape: 'M0,20 C25,45 75,45 100,20 L100,100 L0,100 Z'
     },
     { 
       title: 'Inter Mascotas', 
@@ -84,7 +90,9 @@ export default function TravelAssistanceCards() {
           <li>✔ Cobertura de transporte y cancelaciones que afecten al animal</li>
           <li>✔ Ejemplo: Tratamiento por intoxicación de tu mascota</li>
         </ul>
-      )
+      ),
+      gradient: 'from-orange-400 to-red-600',
+      shape: 'M0,20 L100,0 L100,100 C50,80 30,100 0,80 Z'
     }
   ];
 
@@ -93,7 +101,7 @@ export default function TravelAssistanceCards() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-white to-slate-200 flex items-center justify-center font-sans text-gray-800 p-8">
+    <div className="bg-gradient-to-r from-white to-slate-100 flex items-center justify-center font-sans text-gray-800 p-8">
       <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {cards.map((card, index) => (
           <div
@@ -110,15 +118,27 @@ export default function TravelAssistanceCards() {
             >
               {/* Front side */}
               <div className={`absolute w-full h-full rounded-lg shadow-lg backface-hidden ${flippedIndex === index ? 'hidden' : 'block'}`}>
-                <div className="flex justify-center items-center h-full">
-                  <div className="w-40 h-40 rounded-full overflow-hidden bg-white border-4 border-gray-200 flex items-center justify-center mb-4">
-                    <Image
-                      src={card.image}
-                      alt={card.title}
-                      className="object-cover"
-                      width={160}
-                      height={160}
-                    />
+                <div className="relative w-full h-full">
+                  <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full">
+                    <defs>
+                      <linearGradient id={`gradient-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#34D399" /> {/* Verde inicial */}
+                        <stop offset="30%" stopColor="#6EE7B7" /> {/* Verde claro */}
+                        <stop offset="100%" stopColor="#FFFFFF" /> {/* Blanco */}
+                      </linearGradient>
+                    </defs>
+                    <path d={card.shape} fill={`url(#gradient-${index})`} />
+                  </svg>
+                  <div className="flex justify-center items-center h-full z-10 relative">
+                    <div className="w-40 h-40 rounded-full overflow-hidden bg-white border-4 border-gray-200 flex items-center justify-center mb-4">
+                      <Image
+                        src={card.image}
+                        alt={card.title}
+                        className="object-cover"
+                        width={160}
+                        height={160}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className="absolute top-0 left-0 bg-green-500 text-white py-2 px-4 rounded-tl-lg rounded-br-lg shadow-md transform -rotate-6 z-10">
@@ -138,7 +158,7 @@ export default function TravelAssistanceCards() {
                   {card.backContent}
                 </div>
                 <button className="mt-4 px-4 py-2 text-gray-800 rounded-lg" onClick={() => handleFlip(index)}>
-                  
+            
                 </button>
               </div>
             </div>

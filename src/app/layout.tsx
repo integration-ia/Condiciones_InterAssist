@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "./components/Navbar"; // Importa el Navbar
+import Navbar from "./components/visual/Navbar"; // Importa el Navbar
 
 // Cargando las fuentes personalizadas
 const geistSans = localFont({

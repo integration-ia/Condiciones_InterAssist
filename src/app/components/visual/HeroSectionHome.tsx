@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import gsap from "gsap";
-import "../styles/home.css"; 
-import MobileCotization from "../components/MobileCotization";
-import AgencyPopUp from "../components/AgencyPopUp"; 
+import "../../styles/home.css"; 
+import MobileCotization from "../../components/visual/MobileCotization";
+import AgencyPopUp from "../../components/visual/AgencyPopUp"; 
 
 const HeroSectionHome = () => {
   const [isMobile, setIsMobile] = useState(false);

@@ -1,8 +1,8 @@
 "use client";
 import { useEffect } from "react";
-import HeroSection from "../components/HeroSection";
-import SearchAndCards from "../components/SearchAndCards";
-import InfiniteCompanyLogos from "../components/InfiniteCompanyLogos";
+import HeroSection from "../components/visual/HeroSection";
+import SearchAndCards from "../components/visual/SearchAndCards";
+import InfiniteCompanyLogos from "../components/visual/InfiniteCompanyLogos";
 
 
 
