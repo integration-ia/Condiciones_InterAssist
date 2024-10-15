@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { CalendarIcon, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 
 type FormValues = {
   email: string;

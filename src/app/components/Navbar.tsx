@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
     >
       <div className="container mx-auto flex justify-between items-center p-4 ">
         {/* Logo */}
-        <div className="text-white text-2xl font-bold sm: w-40 ">
+        <div className="text-white text-2xl font-bold w-40 sm:w-full">
           <Link href="/">
             <Image
               src="/images/Horizontal_blanco.png" // Asegúrate de que el logo esté en esta ruta

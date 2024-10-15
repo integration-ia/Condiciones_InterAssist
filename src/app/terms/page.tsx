@@ -2,7 +2,8 @@
 import { useEffect } from "react";
 import HeroSection from "../components/HeroSection";
 import SearchAndCards from "../components/SearchAndCards";
-import Image from 'next/image';
+import InfiniteCompanyLogos from "../components/InfiniteCompanyLogos";
+
 
 
 const TermsPage: React.FC = () => {
@@ -18,6 +19,7 @@ const TermsPage: React.FC = () => {
       <h1 className="text-3xl font-bold mb-4 text-gray-700"></h1>
       <HeroSection />
       <SearchAndCards />
+      <InfiniteCompanyLogos />
       
     </div>
   );

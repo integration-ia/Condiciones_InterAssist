@@ -115,3 +115,11 @@ body {
   scrollbar-width: thin; /* Firefox */
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent; /* Firefox */
 }
+
+.fixed.bottom-4.right-4  {
+  z-index: 100; /* Asegurarse de que el z-index sea suficientemente alto */
+}
+
+.chatcomponet10{
+  z-index: 101
+}
