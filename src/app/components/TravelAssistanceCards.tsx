@@ -4,10 +4,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image'; 
 
 // Importa las imágenes
-import Mochila from '../../../../public/images/Mochila.png';
-import Avion from '../../../../public/images/avion.png';
-import BoletoDorado from '../../../../public/images/boletodorado.png';
-import Mascota from '../../../../public/images/f4d38af8-d798-432c-b193-17e8d5285174.webp';
+import Mochila from '../../../public/images/Mochila.png';
+import Avion from '../../../public/images/avion.png';
+import BoletoDorado from '../../../public/images/boletodorado.png';
+import Mascota from '../../../public/images/f4d38af8-d798-432c-b193-17e8d5285174.webp';
 
 export default function TravelAssistanceCards() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
