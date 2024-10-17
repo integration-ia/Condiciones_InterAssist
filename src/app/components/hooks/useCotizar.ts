@@ -1,7 +1,9 @@
 // /hooks/useCotizar.ts
+
 import { Dispatch, SetStateAction, useState } from 'react';
 import axios from 'axios';
 import { calculateQuotes } from '../utils/calculateQuotes';
+import removeMarkdown from 'remove-markdown';
 
 interface TravelDetails {
   passengers: number;
@@ -81,50 +83,73 @@ const useCotizar = (
         // Calcular las cotizaciones
         const quotes = calculateQuotes(travelData);
 
-        // Generar el mensaje con consejos utilizando la API de OpenAI
-        const adviceRes = await axios.post('/api/gpt', {
-            prompt: `
-              Eres un agente de viajes virtual. Tienes las siguientes cotizaciones para ofrecer al cliente:
-          
-              ${quotes.map((q) => `- ${q.plan}: ${q.price} USD`).join('\n')}
-          
-              Las características de cada plan son:
-          
-              - **Inter60**: Cobertura médica internacional hasta 60,000 USD. Incluye beneficios esenciales para viajes cortos y destinos cercanos.
-          
-              - **Inter100**: Cobertura médica internacional hasta 100,000 USD. Incluye seguro de cancelación y pérdida de equipaje, ofreciendo mayor tranquilidad en tus viajes.
-          
-              - **Inter200**: Cobertura médica internacional completa con múltiples destinos. Incluye seguro de cancelación, vuelos de repatriación sanitaria, mayor monto de pérdida de equipaje y asistencia adicional para una experiencia sin preocupaciones.
-          
-              Proporciona información sobre cada producto de manera estructurada y clara, describiendo brevemente las características y beneficios de cada plan. Asegúrate de que el cliente entienda las diferencias entre ellos. Recomienda al cliente el plan Inter200, destacando sus beneficios y por qué es la mejor opción. No menciones que es el más caro, sino enfócate en el valor que ofrece.
-          
-              Instrucciones:
-              - Responde en un tono amable y profesional.
-              - Utiliza formato Markdown para mejorar la legibilidad (por ejemplo, encabezados, listas, etc.).
-              - No incluyas asteriscos (*) en los nombres de los planes en tu respuesta final.
-              - No incluyas información adicional fuera de lo solicitado.
-            `,
-            max_tokens: 500,
-          });
-          
+        // Generar las descripciones de los planes con los precios actuales
+        const planDescriptions = `
+Inter60 tiene un valor de ${quotes[0].price} USD
 
-          const advice = adviceRes.data.completion;
-          
-          const removeAsterisks = (text: string): string => {
-            return text.replace(/\*\*/g, '');
-          };
+- Cobertura médica internacional hasta 60,000 USD.
+- Incluye asistencia básica para emergencias médicas y accidentes.
+- Ideal para viajes cortos y destinos cercanos.
 
-          // Eliminar los asteriscos del mensaje
-          const cleanedAdvice = removeAsterisks(advice.trim());
-          
-          // Añadir el mensaje limpio al chat
-          setMessages((prevMessages) => [...prevMessages, { text: cleanedAdvice, isUser: false }]);
+Inter100 tiene un valor de ${quotes[1].price} USD
 
-        // Añadir la pregunta en una burbuja separada
-        setMessages((prevMessages) => [...prevMessages, { text: '¿Te gustaría avanzar con alguna de estas cotizaciones?', isUser: false }]);
+- Cobertura médica internacional hasta 100,000 USD.
+- Incluye todo lo del plan Inter60, más:
+- Seguro de cancelación de viaje.
+- Cobertura por pérdida de equipaje.
+- Brinda mayor tranquilidad y protección durante tu viaje.
+
+Inter200 tiene un valor de ${quotes[2].price} USD
+
+- Cobertura médica internacional hasta 200,000 USD.
+- Incluye todo lo de los planes anteriores, más:
+- Cobertura para múltiples destinos.
+- Vuelos de repatriación sanitaria.
+- Mayor monto de indemnización por pérdida de equipaje.
+- Proporciona asistencia completa para una experiencia de viaje sin preocupaciones.
+        `;
+
+        // Generar la recomendación personalizada utilizando la API de GPT
+        const recommendationPrompt = `
+Eres un agente de viajes virtual. El cliente planea un viaje de ${duration} días a ${destination}, con ${passengers} pasajero(s) de edades ${ages.join(', ')}.
+        
+Tu objetivo es recomendar el plan Inter200 destacando sus beneficios y por qué es la mejor opción para este viaje, asegurando una experiencia cómoda y segura para el cliente y sus acompañantes.
+        
+Instrucciones:
+- Solo brindame 1 respuesta.
+- La respuesta debe tener 350 caracteres. Es imperativo que no exceda los 350 caracteres.
+- La duración y el destino deben aparecer en diferentes posiciones dentro de cada respuesta, alternando su ubicación para evitar que todas las respuestas sigan un patrón.
+- Ofrece respuestas que varíen en tono y estructura, manteniendo siempre un enfoque amable y profesional.
+- La respuesta debe tener 350 caracteres. Es imperativo que no exceda los 350 caracteres.
+- No menciones que el plan es el más caro; destaca el valor que ofrece.
+- No utilices asteriscos, negritas ni Markdown.
+- Mantén la información relevante y no añadas detalles fuera de lo solicitado.
+- Asegúrate de que la longitud sea estrictamente respetada.
+`;
+
+        const recommendationRes = await axios.post('/api/gpt', {
+          prompt: recommendationPrompt,
+          max_tokens: 100,
+        });
+
+        const recommendation = recommendationRes.data.completion.trim();
+
+        // Eliminar cualquier formato Markdown del mensaje
+        const cleanedRecommendation = removeMarkdown(recommendation);
+
+        // Combinar todos los mensajes nuevos en un solo arreglo
+        const newMessages = [
+          { text: planDescriptions.trim(), isUser: false },
+          { text: cleanedRecommendation, isUser: false },
+          { text: '¿Te gustaría avanzar con alguna de estas cotizaciones?', isUser: false },
+        ];
+
+        // Añadir todos los mensajes al chat en una sola llamada
+        setMessages((prevMessages) => [...prevMessages, ...newMessages]);
 
         // Cambiar la etapa de la conversación
         setConversationStage('cotizar_confirm');
+
       } catch (parseError) {
         // Manejar error de parseo
         setMessages((prevMessages) => [

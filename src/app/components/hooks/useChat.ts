@@ -1,9 +1,6 @@
 // /hooks/useChat.ts
+
 import { useState } from 'react';
-
-
-
-
 import useInitialChoice from './useInitialChoice';
 import useModificar from './useModificar';
 import useCotizarConfirm from './useCotizazrConfirm';
@@ -17,7 +14,7 @@ interface Message {
 const useChat = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
-      text: "¡Hola! Soy tu asistente virtual. ¿En qué puedo ayudarte hoy? Puedo cotizar un viaje, modificar una asistencia emitida o dar de baja una asistencia emitida. Por favor, escribe 'Cotizar', 'Modificar' o 'Eliminar'.",
+      text: "¡Hola! Soy tu asistente virtual. ¿En qué puedo ayudarte hoy? Puedo ayudarte a cotizar un viaje o modificar una asistencia ya emitida. Solo cuéntame qué necesitas y estaré encantado de asistirte",
       isUser: false,
     },
   ]);

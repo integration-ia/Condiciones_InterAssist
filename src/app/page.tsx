@@ -1,5 +1,5 @@
 // /page.tsx
-import ChatComponent from "./components/ChatComponent";
+import ChatComponent from "./components/ChatBot/ChatComponent";
 import HeroSectionHome from "./components/HeroSectionHome";
 import InfiniteCompanyLogos from "./components/InfiniteCompanyLogos";
 import MobileCotization from "./components/SearchAndCards";
