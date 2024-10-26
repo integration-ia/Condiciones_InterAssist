@@ -123,3 +123,21 @@ body {
 .chatcomponet10{
   z-index: 101
 }
+
+@keyframes silver-aura {
+  0%, 100% { box-shadow: 0 0 5px 2px rgba(192, 192, 192, 0.3); }
+  50% { box-shadow: 0 0 15px 5px rgba(192, 192, 192, 0.5); }
+}
+
+@keyframes gold-aura {
+  0%, 100% { box-shadow: 0 0 5px 2px rgba(255, 215, 0, 0.3); }
+  50% { box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.5); }
+}
+
+.ticket-aura-silver {
+  animation: silver-aura 3s infinite;
+}
+
+.ticket-aura-gold {
+  animation: gold-aura 3s infinite;
+}

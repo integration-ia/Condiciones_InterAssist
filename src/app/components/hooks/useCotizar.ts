@@ -92,28 +92,28 @@ const useCotizar = (
 
       // Generar las descripciones de los planes con los precios actuales
       const planDescriptions = `
-        Inter60 tiene un valor de ${quotes[0].price} USD
+Inter60 tiene un valor de ${quotes[0].price} USD
 
-        - Cobertura médica internacional hasta 60,000 USD.
-        - Incluye asistencia básica para emergencias médicas y accidentes.
-        - Ideal para viajes cortos y destinos cercanos.
+- Cobertura médica internacional hasta 60,000 USD.
+- Incluye asistencia básica para emergencias médicas y accidentes.
+- Ideal para viajes cortos y destinos cercanos.
 
-        Inter100 tiene un valor de ${quotes[1].price} USD
+Inter100 tiene un valor de ${quotes[1].price} USD
 
-        - Cobertura médica internacional hasta 100,000 USD.
-        - Incluye todo lo del plan Inter60, más:
-        - Seguro de cancelación de viaje.
-        - Cobertura por pérdida de equipaje.
-        - Brinda mayor tranquilidad y protección durante tu viaje.
+- Cobertura médica internacional hasta 100,000 USD.
+- Incluye todo lo del plan Inter60, más:
+- Seguro de cancelación de viaje.
+- Cobertura por pérdida de equipaje.
+- Brinda mayor tranquilidad y protección durante tu viaje.
 
-        Inter200 tiene un valor de ${quotes[2].price} USD
+Inter200 tiene un valor de ${quotes[2].price} USD
 
-        - Cobertura médica internacional hasta 200,000 USD.
-        - Incluye todo lo de los planes anteriores, más:
-        - Cobertura para múltiples destinos.
-        - Vuelos de repatriación sanitaria.
-        - Mayor monto de indemnización por pérdida de equipaje.
-        - Proporciona asistencia completa para una experiencia de viaje sin preocupaciones.
+- Cobertura médica internacional hasta 200,000 USD.
+- Incluye todo lo de los planes anteriores, más:
+- Cobertura para múltiples destinos.
+- Vuelos de repatriación sanitaria.
+- Mayor monto de indemnización por pérdida de equipaje.
+- Proporciona asistencia completa para una experiencia de viaje sin preocupaciones.
       `;
 
       // Generar la recomendación personalizada utilizando la API de GPT
