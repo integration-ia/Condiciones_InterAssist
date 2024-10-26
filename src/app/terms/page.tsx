@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import HeroSection from "../components/HeroSection";
 import SearchAndCards from "../components/SearchAndCards";
 import InfiniteCompanyLogos from "../components/InfiniteCompanyLogos";
+import EnhancedAssistCardBenefits from "../components/EnhancedAssistCardBenefits";
 
 
 
@@ -20,7 +21,7 @@ const TermsPage: React.FC = () => {
       <HeroSection />
       <SearchAndCards />
       <InfiniteCompanyLogos />
-      
+      <EnhancedAssistCardBenefits />
     </div>
   );
 };

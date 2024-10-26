@@ -39,12 +39,13 @@ export default function MobileCotization() {
   });
 
   return (
-    <div className="ml-auto flex items-center min-h-screen bg-transparent p-4 mr-60 m: mr-24">
-      {/* iPhone-like container */}
-      <div className="relative w-[375px] h-[812px] bg-white rounded-[50px] shadow-xl overflow-hidden border-8 border-gray-800">
+    
+    <div className="ml-auto flex items-center min-h-screen bg-transparent p-4 lg:flex-row flex-col lg:justify-end lg:mr-[calc(9vw)] mt-16">
+      {/* Escala el componente al 87% */}
+      <div className="relative w-[375px] h-[812px] bg-white rounded-[50px] shadow-xl overflow-hidden border-8 border-gray-800 transform scale-[.87] origin-center lg:mr-4">
         {/* iPhone-like top bar */}
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-40 h-6 bg-gray-800 rounded-b-2xl shadow-xl"></div>
-
+  
         {/* Main content area */}
         <div className="p-6 overflow-y-auto custom-scrollbar h-full flex flex-col justify-between bg-white">
           <h5 className="text-2xl font-bold mb-4 mt-6 text-center text-black">
@@ -63,7 +64,7 @@ export default function MobileCotization() {
                 type="email"
               />
             </div>
-
+  
             {/* Celular */}
             <div className="space-y-2">
               <label className="block text-gray-700 text-sm font-bold mb-1">
@@ -76,7 +77,7 @@ export default function MobileCotization() {
                 type="tel"
               />
             </div>
-
+  
             {/* Tipo de Asistencia */}
             <div className="space-y-2">
               <label className="block text-gray-700 text-sm font-bold mb-1">
@@ -91,7 +92,7 @@ export default function MobileCotization() {
                 <option value="premium">Premium</option>
               </select>
             </div>
-
+  
             {/* Destino con autocompletado */}
             <div className="space-y-2">
               <label className="block text-gray-700 text-sm font-bold mb-1">
@@ -111,7 +112,7 @@ export default function MobileCotization() {
                 <option value="Nueva York" />
               </datalist>
             </div>
-
+  
             {/* Selección de fecha (rango de fechas) */}
             <div className="space-y-2">
               <label className="block text-gray-700 text-sm font-bold mb-1">
@@ -131,7 +132,7 @@ export default function MobileCotization() {
                 dateFormat="dd/MM/yyyy"
               />
             </div>
-
+  
             {/* Pasajeros */}
             <div>
               {fields.map((field, index) => (
@@ -158,7 +159,7 @@ export default function MobileCotization() {
                   </button>
                 </div>
               ))}
-
+  
               {/* Agregar pasajero */}
               <button
                 type="button"
@@ -181,4 +182,5 @@ export default function MobileCotization() {
       </div>
     </div>
   );
+  
 }

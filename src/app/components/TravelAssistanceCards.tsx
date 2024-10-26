@@ -101,8 +101,16 @@ export default function TravelAssistanceCards() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-white to-slate-100 flex items-center justify-center font-sans text-gray-800 p-8">
+    <div className="bg-gradient-to-r from-white to-slate-100 flex flex-col items-center justify-center font-sans text-gray-800 p-8 my-20">
+      
+      {/* Título centrado */}
+      <h2 className="text-4xl font-bold text-center mb-12 text-green-800 my-8">
+        Una asistencia para cada viaje
+      </h2>
+  
+      {/* Contenedor de tarjetas */}
       <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        
         {cards.map((card, index) => (
           <div
             key={index}
@@ -121,7 +129,7 @@ export default function TravelAssistanceCards() {
                 <div className="relative w-full h-full">
                   <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full">
                     <defs>
-                      <linearGradient id={`gradient-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                      <linearGradient id={`gradient-${index}`} x1="0%" y1="0%" x2="100%">
                         <stop offset="0%" stopColor="#34D399" /> {/* Verde inicial */}
                         <stop offset="30%" stopColor="#6EE7B7" /> {/* Verde claro */}
                         <stop offset="100%" stopColor="#FFFFFF" /> {/* Blanco */}
@@ -148,7 +156,7 @@ export default function TravelAssistanceCards() {
                   {card.description}
                 </span>
               </div>
-
+  
               {/* Back side */}
               <div className={`absolute w-full h-full rounded-lg shadow-lg transform rotate-y-180 flex flex-col items-center justify-center p-4 bg-white ${flippedIndex === index ? 'block' : 'hidden'}`}>
                 <div className="absolute top-0 left-0 bg-green-500 text-white py-2 px-4 rounded-tl-lg rounded-br-lg shadow-md transform -rotate-6 z-10">
@@ -158,7 +166,7 @@ export default function TravelAssistanceCards() {
                   {card.backContent}
                 </div>
                 <button className="mt-4 px-4 py-2 text-gray-800 rounded-lg" onClick={() => handleFlip(index)}>
-            
+                  
                 </button>
               </div>
             </div>
@@ -166,5 +174,6 @@ export default function TravelAssistanceCards() {
         ))}
       </div>
     </div>
-  );
+  )
 }
+  

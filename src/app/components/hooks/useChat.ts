@@ -1,15 +1,12 @@
-// /hooks/useChat.ts
+// src/hooks/useChat.ts
 
 import { useState } from 'react';
 import useInitialChoice from './useInitialChoice';
 import useModificar from './useModificar';
-import useCotizarConfirm from './useCotizazrConfirm';
+import useCotizarConfirm from './useCotizarConfirm';
 import useCotizar from './useCotizar';
-
-interface Message {
-  text: string;
-  isUser: boolean;
-}
+import useCollectingData from './useCollectingData';
+import { ConversationStage, Message, TravelDetails, UserData } from '../../types';
 
 const useChat = () => {
   const [messages, setMessages] = useState<Message[]>([
@@ -20,13 +17,16 @@ const useChat = () => {
   ]);
   const [prompt, setPrompt] = useState('');
   const [loading, setLoading] = useState(false);
-  const [conversationStage, setConversationStage] = useState('initial');
+  const [conversationStage, setConversationStage] = useState<ConversationStage>('initial');
+  const [travelDetails, setTravelDetails] = useState<TravelDetails | null>(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
 
   // Hooks específicos de cada etapa
   const { handleInitialChoice } = useInitialChoice(setMessages, setConversationStage);
-  const { handleCotizar } = useCotizar(setMessages, setConversationStage, setLoading);
-  const { handleCotizarConfirm } = useCotizarConfirm(setMessages, setConversationStage);
+  const { handleCotizar } = useCotizar(setMessages, setConversationStage, setLoading, setTravelDetails);
+  const { handleCotizarConfirm } = useCotizarConfirm(setMessages, setConversationStage, travelDetails, setTravelDetails);
   const { handleModificar } = useModificar(setMessages, setConversationStage, setLoading);
+  const { handleCollectingData } = useCollectingData(setMessages, setConversationStage, setLoading, setUserData);
 
   // Función principal para manejar la entrada del usuario
   const handleUserInput = (input: string) => {
@@ -44,8 +44,36 @@ const useChat = () => {
       case 'modificar':
         handleModificar(input);
         break;
-      // Otros casos...
+      case 'collectingData':
+        handleCollectingData(input);
+        break;
+      case 'duda':
+        // Implementa una función similar para manejar dudas si lo deseas
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: '¿Podrías especificar en qué tienes dudas?', isUser: false },
+        ]);
+        break;
+      case 'completed':
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: '¡Gracias por utilizar nuestro servicio! Si necesitas más ayuda, no dudes en contactarnos.', isUser: false },
+        ]);
+        break;
+      case 'reiniciar':
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: '¡Claro! Reiniciando la conversación. ¿En qué puedo ayudarte hoy?', isUser: false },
+        ]);
+        setConversationStage('initial');
+        break;
+      // Otros casos pueden añadirse aquí
       default:
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: 'Lo siento, no entendí tu solicitud. Por favor, intenta de nuevo.', isUser: false },
+        ]);
+        setConversationStage('initial');
         break;
     }
   };
@@ -59,6 +87,10 @@ const useChat = () => {
     handleUserInput,
     conversationStage,
     setConversationStage,
+    travelDetails,
+    setTravelDetails,
+    userData,
+    setUserData,
   };
 };
 

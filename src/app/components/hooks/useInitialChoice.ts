@@ -1,12 +1,13 @@
-// /hooks/useInitialChoice.ts
+// src/hooks/useInitialChoice.ts
 
 import { Dispatch, SetStateAction } from 'react';
 import { getCategoryFromInput } from '../utils/keywordMatching';
 import { normalizeText } from '../utils/normalizeText';
+import { ConversationStage, Message } from '../../types';
 
 const useInitialChoice = (
-  setMessages: Dispatch<SetStateAction<any[]>>,
-  setConversationStage: Dispatch<SetStateAction<string>>
+  setMessages: Dispatch<SetStateAction<Message[]>>,
+  setConversationStage: Dispatch<SetStateAction<ConversationStage>>
 ) => {
   const handleInitialChoice = (input: string) => {
     const normalizedInput = normalizeText(input);
@@ -30,7 +31,13 @@ const useInitialChoice = (
           isUser: false,
         },
       ]);
-    } else {
+    } 
+    // Futuras opciones como 'eliminar'
+    // else if (category === 'eliminar') {
+    //   setConversationStage('eliminar');
+    //   // Implementar lógica para eliminar
+    // }
+    else {
       // Manejar entrada desconocida
       setMessages((prevMessages) => [
         ...prevMessages,

@@ -17,9 +17,6 @@ export default function InfiniteCompanyLogos() {
     <div className="py-12 overflow-visible relative z-10">
       {/* Aseguramos que el contenedor sea visible */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-8 relative z-10">
-          Empresas que nos eligen
-        </h2>
         <div className="relative z-10">
           <div className="flex overflow-hidden relative z-10">
             <div className="flex animate-marquee relative z-10">

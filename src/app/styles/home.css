@@ -175,17 +175,7 @@ article {
 
 /*  SECTION: Overlay Menu Section
 ----------------------------------------------- */
-section {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 9;
-  min-height: 100vh;
-  padding: 8em 5em 2em 5em;
-  background-color: var(--white);
-  background-image: url("https://www.transparenttextures.com/patterns/church.png");
-  clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
-}
+
 
 .level-1 {
   display: grid;

@@ -1,5 +1,5 @@
 // utils/keywordMatching.ts
-
+import { normalizeText } from './normalizeText';
 // Palabras clave para cada categoría
 const keywords = {
     cotizar: [
@@ -141,23 +141,120 @@ const keywords = {
         'reajustar detalles',
       ]
       ,
+      confirmar: [
+        'sí',
+        'si',
+        'claro',
+        'por supuesto',
+        'definitivamente',
+        'exacto',
+        'afirmativo',
+        'seguro',
+        'de acuerdo',
+        'vale',
+        'vale la pena',
+        'totalmente',
+        'por supuesto que sí',
+        'sin duda',
+      ],
+      negar: [
+        'no',
+        'negativo',
+        'de ninguna manera',
+        'nunca',
+        'en absoluto',
+        'no gracias',
+        'para nada',
+        'no lo creo',
+        'no estoy seguro',
+        'no quiero',
+        'no me interesa',
+        'rechazo',
+        'imposible',
+        'definitivamente no',
+        'de ninguna forma',
+        'ni pensarlo',
+        'lo descarto',
+        'no es posible',
+        'no lo veo posible',
+        'no tengo interés',
+        'lo niego',
+        'ni de broma',
+        'de ninguna',
+        'ni hablar',
+        'no va a pasar'
+      ],
+      duda: [
+        'quizás',
+        'tal vez',
+        'no estoy seguro',
+        'no sé',
+        'puede ser',
+        'no lo sé',
+        'no tengo claro',
+        'no lo tengo claro',
+        'no estoy convencido',
+        'me genera dudas',
+        'no estoy del todo seguro',
+        'tengo mis dudas',
+        'no estoy completamente seguro',
+        'no estoy seguro al 100%',
+        'me hace dudar',
+        'no me queda claro',
+        'no lo tengo del todo claro',
+        'tengo incertidumbre',
+        'dudo sobre eso',
+        'no estoy del todo convencido',
+        'tengo ciertas dudas',
+        'aún lo estoy pensando',
+        'me lo estoy cuestionando',
+        'no estoy seguro de eso',
+        'no me convence del todo'
+      ],
+      reiniciar: [
+        'reiniciar',
+        'empezar de nuevo',
+        'comenzar de nuevo',
+        'volver a iniciar',
+        'resetear',
+        'volver al inicio',
+        'comenzar otra vez',
+        'empezar otra vez',
+        'volver a empezar',
+        'borrar y empezar de nuevo',
+        'recomenzar',
+        'iniciar desde cero',
+        'arrancar de nuevo',
+        'hacerlo desde el principio',
+        'reiniciar conversación',
+        'comenzar una nueva consulta',
+        'abrir nueva cotización',
+        'crear una nueva conversación',
+        'resetear interacción',
+        'empezar nueva solicitud',
+        'abrir una nueva consulta',
+        'comenzar nueva solicitud',
+        'crear otra consulta',
+        'volver a preguntar',
+        'nueva cotización',
+        'iniciar otra consulta'
+      ],
   };
   
-  // Función que identifica si la entrada del usuario pertenece a una categoría
-  export const getCategoryFromInput = (
-    input: string
-  ): 'cotizar' | 'modificar' | 'desconocido' => {
-    // Busca si el input contiene alguna palabra clave de cotización
-    if (keywords.cotizar.some((keyword) => input.includes(keyword))) {
-      return 'cotizar';
+// Función que identifica la categoría de la entrada del usuario
+export const getCategoryFromInput = (
+  input: string
+):  'cotizar' | 'modificar' | 'confirmar' | 'negar' | 'duda' | 'reiniciar' | 'desconocido' => {
+  // Normalizar el texto primero
+  const normalizedInput = normalizeText(input);
+
+  // Buscar en cada categoría
+  for (const [category, kws] of Object.entries(keywords)) {
+    if (kws.some((keyword) => normalizedInput.includes(keyword))) {
+      return category as 'cotizar' | 'modificar' |'confirmar' | 'negar' | 'duda' | 'reiniciar';
     }
-  
-    // Busca si el input contiene alguna palabra clave de modificación
-    if (keywords.modificar.some((keyword) => input.includes(keyword))) {
-      return 'modificar';
-    }
-  
-    // Si no encuentra coincidencias, devolver 'desconocido'
-    return 'desconocido';
-  };
+  }
+
+  return 'desconocido';
+};
   
