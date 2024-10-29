@@ -32,8 +32,13 @@ export async function POST(req: Request) {
 
     const completion = response.data.choices[0].message.content.trim();
     return NextResponse.json({ completion });
-  } catch (error: any) {
-    console.error('Error en la solicitud a OpenAI:', error.message);
-    return NextResponse.json({ message: 'Error al obtener respuesta de OpenAI', error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error('Error en la solicitud a OpenAI:', error.message);
+      return NextResponse.json({ message: 'Error al obtener respuesta de OpenAI', error: error.message }, { status: 500 });
+    } else {
+      console.error('Error desconocido en la solicitud a OpenAI:', error);
+      return NextResponse.json({ message: 'Error desconocido al obtener respuesta de OpenAI' }, { status: 500 });
+    }
   }
 }
