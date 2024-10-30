@@ -30,7 +30,7 @@ export const calculateQuotes = ({ passengers, ages, destination, duration }: Tra
   const basePrice = 100; // Precio base por pasajero
 
   // Obtener el continente a partir de la ciudad de destino
-  const continent = cityToContinentTyped[destination]; // Ahora funciona correctamente
+  const continent = cityToContinentTyped[destination];
 
   // Si no se encuentra el continente en el JSON, asignar multiplicador por defecto (1.0)
   const destinationMultiplier = continentMultipliers[continent] || 1.0;
@@ -41,12 +41,33 @@ export const calculateQuotes = ({ passengers, ages, destination, duration }: Tra
     Inter200: 200,
   };
 
+  // Calculamos el número de pasajeros sin edad especificada
+  const unknownPassengers = passengers - ages.length;
+
   const quotes = (Object.keys(plans) as PlanName[]).map((planName) => {
     const coverageMultiplier = plans[planName] / 100;
-    const totalPrice = ages.reduce((acc, age) => {
+
+    // Precio total para pasajeros con edad conocida
+    const totalPriceKnownAges = ages.reduce((acc, age) => {
       const ageMultiplier = age > 50 ? 1.2 : 1.0;
-      return acc + basePrice * destinationMultiplier * ageMultiplier * coverageMultiplier;
-    }, 0) * duration;
+      return (
+        acc +
+        basePrice * destinationMultiplier * ageMultiplier * coverageMultiplier
+      );
+    }, 0);
+
+    // Precio total para pasajeros sin edad conocida (asumiendo multiplicador de edad 1.0)
+    const totalPriceUnknownAges =
+      unknownPassengers > 0
+        ? unknownPassengers *
+          basePrice *
+          destinationMultiplier *
+          1.0 * // Multiplicador de edad asumido
+          coverageMultiplier
+        : 0;
+
+    // Precio total combinado, multiplicado por la duración del viaje
+    const totalPrice = (totalPriceKnownAges + totalPriceUnknownAges) * duration;
 
     return { plan: planName, price: totalPrice.toFixed(2) };
   });

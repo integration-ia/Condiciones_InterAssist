@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction } from 'react';
 import { ConversationStage, Message } from '../../types'; // Ajusta la ruta según tu estructura de carpetas
-import axios from 'axios';
+
 
 const useModificar = (
   setMessages: Dispatch<SetStateAction<Message[]>>,
@@ -49,10 +49,10 @@ const useModificar = (
       setLoading(false);
     }
   };
-
   const validateUserInput = (input: string): boolean => {
-    // Implementa la lógica de validación
-    return true; // Valor de ejemplo
+    // Supongamos que estás validando que el input sea un DNI numérico de 8 dígitos
+    const dniRegex = /^\d{8}$/;
+    return dniRegex.test(input); // Valida que el input sea un número de 8 dígitos
   };
 
   return { handleModificar };

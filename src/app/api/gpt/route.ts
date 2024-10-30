@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import axios from 'axios';
 
 export async function POST(req: Request) {
-  console.log('API Key:', process.env.OPENAI_API_KEY);  // Verifica si la API Key se imprime
 
   const { prompt } = await req.json();  // Recibe el prompt del cuerpo de la solicitud
 

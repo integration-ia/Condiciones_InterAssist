@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction } from 'react';
 import { ConversationStage, Message, UserData } from '../../types';
-import { normalizeText } from '../utils/normalizeText';
+
 
 const useCollectingData = (
   setMessages: Dispatch<SetStateAction<Message[]>>,

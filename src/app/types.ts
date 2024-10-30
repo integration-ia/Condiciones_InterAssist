@@ -37,3 +37,13 @@ export interface UserData {
     fecha_nacimiento: Date;
     // Puedes agregar más campos según tus necesidades
   }
+
+  export interface Quote {
+    plan: string;
+    price: string; // Cambiar a string para soportar toFixed()
+  }
+  
+  export interface QuoteData {
+    quotes: Quote[];
+    travelDetails: TravelDetails;
+  }

@@ -49,7 +49,7 @@ const useCotizar = (
       let jsonResponse: TravelDetails;
       try {
         jsonResponse = JSON.parse(jsonMatch[0]);
-      } catch (parseError) {
+      } catch {
         // Error al parsear JSON
         setMessages((prevMessages) => [
           ...prevMessages,
@@ -157,7 +157,7 @@ Inter200 tiene un valor de ${quotes[2].price} USD
         // Cambiar la etapa de la conversación
         setConversationStage('cotizar_confirm');
 
-      } catch (recommendationError) {
+      } catch {
         // Manejar errores al obtener la recomendación
         setMessages((prevMessages) => [
           ...prevMessages,
@@ -165,7 +165,7 @@ Inter200 tiene un valor de ${quotes[2].price} USD
         ]);
       }
 
-    } catch (error) {
+    } catch {
       // Manejar otros errores (e.g., problemas con la llamada a la API de GPT)
       setMessages((prevMessages) => [
         ...prevMessages,

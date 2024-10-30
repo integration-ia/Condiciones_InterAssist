@@ -24,7 +24,7 @@ const useChat = () => {
   // Hooks específicos de cada etapa
   const { handleInitialChoice } = useInitialChoice(setMessages, setConversationStage);
   const { handleCotizar } = useCotizar(setMessages, setConversationStage, setLoading, setTravelDetails);
-  const { handleCotizarConfirm } = useCotizarConfirm(setMessages, setConversationStage, travelDetails, setTravelDetails);
+  const { handleCotizarConfirm } = useCotizarConfirm(setMessages, setConversationStage);
   const { handleModificar } = useModificar(setMessages, setConversationStage, setLoading);
   const { handleCollectingData } = useCollectingData(setMessages, setConversationStage, setLoading, setUserData);
 

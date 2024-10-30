@@ -8,6 +8,8 @@ import { Trash2 } from "lucide-react";
 import { calculateQuotes } from "../components/utils/calculateQuotes"; // Importa la función de cálculo
 import AirlineTicket from "./AirlineTicket";
 import ciudades from "../data/ciudades.json";
+import { QuoteData, Quote, TravelDetails } from '../types'; // Importa los tipos necesarios
+import Image from "next/image";
 
 type FormValues = {
   email: string;
@@ -28,7 +30,7 @@ export default function MobileCotization() {
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
   const [showQuote, setShowQuote] = useState(false); // Estado para mostrar formulario o cotización
-  const [quoteData, setQuoteData] = useState<any>(null); // Almacena la cotización calculada
+  const [quoteData, setQuoteData] = useState<QuoteData | null>(null); // Inicialmente es `null`
 
   const form = useForm<FormValues>({
     defaultValues: {
@@ -73,16 +75,18 @@ export default function MobileCotization() {
     const ages = data.pasajeros.map((p) => parseInt(p.edad, 10));
     const destination = data.destino;
     const duration =
-      startDate && endDate ? Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) : 0;
+      startDate && endDate
+        ? Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
+        : 0;
 
-    const travelDetails = {
+    const travelDetails: TravelDetails = {
       passengers,
       ages,
       destination,
       duration,
     };
 
-    const quotes = calculateQuotes(travelDetails);
+    const quotes: Quote[] = calculateQuotes(travelDetails);
 
     setQuoteData({
       quotes,
@@ -101,7 +105,7 @@ export default function MobileCotization() {
 
         {/* Área principal de contenido */}
         <div className="p-6 overflow-y-auto custom-scrollbar h-full flex flex-col justify-between bg-white">
-          {showQuote ? (
+          {showQuote && quoteData ? (
             // Componente que muestra la cotización
             <QuoteDisplay quoteData={quoteData} />
           ) : (
@@ -130,10 +134,12 @@ export default function MobileCotization() {
                   </label>
                   <div className="relative">
                     <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                      <img
+                      <Image
                         src="https://flagcdn.com/w40/ar.png"
                         alt="Argentina"
-                        className="w-6 h-4"
+                        width={40} // Define el ancho de la imagen
+                        height={24} // Define la altura de la imagen, acorde con el ancho
+                        className="w-6 h-4" // Aplica tus clases de Tailwind si son necesarias
                       />
                       <span className="ml-2 text-gray-500">+54</span>
                     </span>
@@ -268,7 +274,7 @@ export default function MobileCotization() {
   );
 }
 
-function QuoteDisplay({ quoteData }: { quoteData: any }) {
+function QuoteDisplay({ quoteData }: { quoteData: QuoteData }) {
   const { quotes, travelDetails } = quoteData;
   const [selectedPlan, setSelectedPlan] = useState<string>(''); // Estado para el plan seleccionado
 
@@ -281,7 +287,7 @@ function QuoteDisplay({ quoteData }: { quoteData: any }) {
       <h3 className="text-xl font-bold mb-5 mt-6 text-center text-black">
         Selecciona una asistencia
       </h3>
-      {quotes.map((quote: any, index: number) => (
+      {quotes.map((quote: Quote, index: number) => (
         <AirlineTicket
           key={index}
           plan={quote.plan}

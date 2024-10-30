@@ -1,14 +1,13 @@
 // src/hooks/useCotizarConfirm.ts
 
 import { Dispatch, SetStateAction } from 'react';
-import { ConversationStage, Message, TravelDetails } from '../../types';
+import { ConversationStage, Message } from '../../types';
 import { getCategoryFromInput } from '../utils/keywordMatching'; // Importar la nueva función
 
 const useCotizarConfirm = (
   setMessages: Dispatch<SetStateAction<Message[]>>,
   setConversationStage: Dispatch<SetStateAction<ConversationStage>>,
-  travelDetails: TravelDetails | null,
-  setTravelDetails: Dispatch<SetStateAction<TravelDetails | null>>
+
 ) => {
   const handleCotizarConfirm = (input: string) => {
     const category = getCategoryFromInput(input);

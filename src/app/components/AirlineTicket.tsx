@@ -1,7 +1,7 @@
 // AirlineTicket.tsx
 
 import React from 'react';
-import { Plane, Calendar, Users, DollarSign, Barcode, MapPin } from 'lucide-react';
+import { Plane, Calendar, Users, DollarSign, MapPin } from 'lucide-react';
 
 interface TicketProps {
   plan: string;
@@ -130,7 +130,6 @@ const AirlineTicket: React.FC<TicketProps> = ({
             <p className="text-[9.5px] text-gray-600">{destination}</p>
           </div>
           {/* Puedes decidir mostrar el código de barras si ahora hay espacio */}
-          {/* <Barcode className="w-full h-14 text-emerald-800 mt-2" /> */}
         </div>
       </div>
     </div>

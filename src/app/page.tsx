@@ -3,7 +3,6 @@ import ChatComponent from "./components/ChatBot/ChatComponent";
 import EnhancedAssistCardBenefits from "./components/EnhancedAssistCardBenefits";
 import HeroSectionHome from "./components/HeroSectionHome";
 import InfiniteCompanyLogos from "./components/InfiniteCompanyLogos";
-import MobileCotization from "./components/SearchAndCards";
 import TravelAssistanceCards from "./components/TravelAssistanceCards";
 
 const Home: React.FC = () => {

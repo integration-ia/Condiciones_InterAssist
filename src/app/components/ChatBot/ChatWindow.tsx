@@ -15,9 +15,6 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ toggleChat }) => {
     setPrompt,
     loading,
     handleUserInput,
-    conversationStage,
-    setConversationStage,
-    setMessages,
   } = useChat();
 
   return (
