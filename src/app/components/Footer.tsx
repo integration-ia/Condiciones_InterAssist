@@ -4,7 +4,6 @@ import {
     MessageCircle,
     Send,
     Twitter,
-    ArrowUp,
 } from "lucide-react"
 
 import Image from "next/image";
